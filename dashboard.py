@@ -14,6 +14,7 @@ def findnthoccur(haystack, needle, n):
     return len(haystack)-len(parts[-1])-len(needle)
 
 
+
 st.title('Stock Tracking App for NASDAQ Mega Cap :heavy_dollar_sign: Companies') #above $200B
 
 st.markdown('\n')
@@ -87,12 +88,18 @@ st.write(":black_large_square:")
 st.markdown('\n')
 st.markdown('\n')
 
+
+
 st.write('Find all stocks with percentage change rates within your selected range')
 dif=float(newdf['Percentage Change'].max()) - float(newdf['Percentage Change'].min())
-slid = st.slider('Select a value for percentage change',
+
+if 'slid' not in st.session_state:
+    st.session_state.slid = (float(newdf['Percentage Change'].min())+0.25*dif, float(newdf['Percentage Change'].max())-0.25*dif)
+
+st.session_state = st.slider('Select a value for percentage change',
                   float(newdf['Percentage Change'].min()),
                   float(newdf['Percentage Change'].max()),
-                  (float(newdf['Percentage Change'].min())+0.25*dif, float(newdf['Percentage Change'].max())-0.25*dif))
+                  st.session_state.slid)
                   
 st.write(newdf.loc[(newdf['Percentage Change'] >= slid[0]) & (newdf['Percentage Change'] <= slid[1]), ['Name', 'Opening Price', 'Closing Price', 'Percentage Change']].sort_values(by=['Percentage Change'], ascending=False, inplace=False))
 
