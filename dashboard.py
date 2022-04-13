@@ -96,12 +96,12 @@ dif=float(newdf['Percentage Change'].max()) - float(newdf['Percentage Change'].m
 if 'slid' not in st.session_state:
     st.session_state.slid = (float(newdf['Percentage Change'].min())+0.25*dif, float(newdf['Percentage Change'].max())-0.25*dif)
 
-st.session_state = st.slider('Select a value for percentage change',
+st.session_state.slid = st.slider('Select a value for percentage change',
                   float(newdf['Percentage Change'].min()),
                   float(newdf['Percentage Change'].max()),
                   st.session_state.slid)
                   
-st.write(newdf.loc[(newdf['Percentage Change'] >= slid[0]) & (newdf['Percentage Change'] <= slid[1]), ['Name', 'Opening Price', 'Closing Price', 'Percentage Change']].sort_values(by=['Percentage Change'], ascending=False, inplace=False))
+st.write(newdf.loc[(newdf['Percentage Change'] >= st.session_state.slid[0]) & (newdf['Percentage Change'] <= st.session_state.slid[1]), ['Name', 'Opening Price', 'Closing Price', 'Percentage Change']].sort_values(by=['Percentage Change'], ascending=False, inplace=False))
 
 st.markdown('\n')
 st.markdown('\n')
