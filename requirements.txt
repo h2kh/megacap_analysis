@@ -4,5 +4,5 @@ pandas
 yfinance
 requests
 click==8
-streamlit==0.67.0
+streamlit
 lxml
