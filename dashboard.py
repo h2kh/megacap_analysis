@@ -13,10 +13,6 @@ def findnthoccur(haystack, needle, n):
         return -1
     return len(haystack)-len(parts[-1])-len(needle)
 
-@st.cache
-def downloader():
-    data_file = yf.download(tickers=names_list, period='1d', group_by='ticker')
-    return data_file
 
 st.title('Stock Tracking App for NASDAQ Mega Cap :heavy_dollar_sign: Companies') #above $200B
 
@@ -31,7 +27,7 @@ names_list = ' '.join(names.iloc[:, 0].tolist())
 names['combined'] = names.apply(lambda row: row.names + ' - ' + row.full_names, axis=1)
 
 
-data=downloader()   
+data=yf.download(tickers=names_list, period='1d', group_by='ticker')  
 
 info_list=[]
 
