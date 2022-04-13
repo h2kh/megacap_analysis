@@ -27,7 +27,7 @@ names_list = ' '.join(names.iloc[:, 0].tolist())
 names['combined'] = names.apply(lambda row: row.names + ' - ' + row.full_names, axis=1)
 
 
-data=yf.download(tickers=names_list, period='1d', group_by='ticker')  
+data=yf.download(tickers=names_list, period='1d', group_by='ticker',threads = False)  
 
 info_list=[]
 
