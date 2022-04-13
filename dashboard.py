@@ -94,12 +94,16 @@ st.write('Find all stocks with percentage change rates within your selected rang
 dif=float(newdf['Percentage Change'].max()) - float(newdf['Percentage Change'].min())
 
 if 'slidmin' not in st.session_state:
-    st.session_state.slidmin, st.session_state.slidmax = float(newdf['Percentage Change'].min())+0.25*dif, float(newdf['Percentage Change'].max())-0.25*dif
+    st.session_state.slidmin = float(newdf['Percentage Change'].min())+0.25*dif
+    st.session_state.slidmax = float(newdf['Percentage Change'].max())-0.25*dif
 
-st.session_state.slidmin, st.session_state.slidmax = st.slider('Select a value for percentage change',
+x = st.slider('Select a value for percentage change',
                   float(newdf['Percentage Change'].min()),
                   float(newdf['Percentage Change'].max()),
                   (st.session_state.slidmin, st.session_state.slidmax))
+
+st.session_state.slidmin = x[0]
+st.session_state.slidmax = x[1]
                   
 st.write(newdf.loc[(newdf['Percentage Change'] >= st.session_state.slid[0]) & (newdf['Percentage Change'] <= st.session_state.slid[1]), ['Name', 'Opening Price', 'Closing Price', 'Percentage Change']].sort_values(by=['Percentage Change'], ascending=False, inplace=False))
 
