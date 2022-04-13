@@ -3,5 +3,6 @@ mplfinance==0.12.7a0
 pandas==0.24.2
 yfinance==0.1.54
 requests==2.21.0
+click==8
 streamlit==0.67.0
 lxml
